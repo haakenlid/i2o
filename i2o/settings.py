@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -104,4 +104,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+# BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+BROKER_URL = 'django://'
+
+INSTALLED_APPS += ('kombu.transport.django', )
